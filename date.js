@@ -36,3 +36,5 @@ const argv = yargs(hideBin(process.argv))
     })
     .argv
 
+//TODO Добавить add и sub
+
