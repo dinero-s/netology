@@ -53,13 +53,13 @@ const argv = yargs(hideBin(process.argv))
             })
     }, (argv) => {
         if (argv.year) {
-            console.log(`<Текущий год: ${now.getFullYear() + argv.year}`)
+            console.log(`<Результат сложения годов: ${now.getFullYear() + argv.year}`)
         }
         if (argv.month) {
-            console.log(`<Текущий месяц: ${now.getMonth() + 1 + argv.month}`)
+            console.log(`<Результат сложения месяцев: ${now.getMonth() + 1 + argv.month}`)
         }
         if (argv.day) {
-            console.log(`<Текущий день: ${now.getDate() + argv.day}`)
+            console.log(`<Результат сложения дней: ${now.getDate() + argv.day}`)
         }
     })
     .command('sub', 'Отнять год/месяц/день', (yargs) => {
@@ -81,13 +81,13 @@ const argv = yargs(hideBin(process.argv))
             })
     }, (argv) => {
         if (argv.year) {
-            console.log(`<Текущий год: ${now.getFullYear() - argv.year}`)
+            console.log(`<Результат вычитания годов: ${now.getFullYear() - argv.year}`)
         }
         if (argv.month) {
-            console.log(`<Текущий месяц: ${now.getMonth() + 1 - argv.month}`)
+            console.log(`<Результат вычитания месяцев: ${now.getMonth() + 1 - argv.month}`)
         }
         if (argv.day) {
-            console.log(`<Текущий день: ${now.getDate() - argv.day}`)
+            console.log(`<Результат вычитания дней: ${now.getDate() - argv.day}`)
         }
     })
     .argv
