@@ -1,0 +1,82 @@
+dinarsabangulov@Mac-mini-DINERO ~ % docker login
+Authenticating with existing credentials... [Username: devdinero]
+
+i Info → To login with a different account, run 'docker logout' followed by 'docker login'
+
+
+Login Succeeded
+dinarsabangulov@Mac-mini-DINERO ~ % docker pull busybox
+Using default tag: latest
+latest: Pulling from library/busybox
+265dab34035e: Pull complete 
+Digest: sha256:37f7b378a29ceb4c551b1b5582e27747b855bbfaa73fa11914fe0df028dc581f
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+dinarsabangulov@Mac-mini-DINERO ~ % docker run --name pinger busybox ping -c 7 netology.ru
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=151.833 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=131.315 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=135.239 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=135.697 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=139.096 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=131.983 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=158.660 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 131.315/140.546/158.660 ms
+dinarsabangulov@Mac-mini-DINERO ~ % docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
+9b3b5437fab4   busybox   "ping -c 7 netology.…"   18 seconds ago   Exited (0) 10 seconds ago             pinger
+dinarsabangulov@Mac-mini-DINERO ~ % docker logs pinger
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=151.833 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=131.315 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=135.239 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=135.697 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=139.096 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=131.983 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=158.660 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 131.315/140.546/158.660 ms
+dinarsabangulov@Mac-mini-DINERO ~ % start pinger
+zsh: command not found: start
+dinarsabangulov@Mac-mini-DINERO ~ % docker start pinger
+pinger
+dinarsabangulov@Mac-mini-DINERO ~ % docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+9b3b5437fab4   busybox   "ping -c 7 netology.…"   54 seconds ago   Exited (0) 3 seconds ago             pinger
+dinarsabangulov@Mac-mini-DINERO ~ % docker logs pinger
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=151.833 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=131.315 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=135.239 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=135.697 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=139.096 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=131.983 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=158.660 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 131.315/140.546/158.660 ms
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=515.534 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=234.418 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=517.622 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=149.062 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=698.561 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=363.834 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=291.224 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 149.062/395.750/698.561 ms
+dinarsabangulov@Mac-mini-DINERO ~ % docker rm pinger
+pinger
+dinarsabangulov@Mac-mini-DINERO ~ % docker rmi busybox
+Untagged: busybox:latest
+Deleted: sha256:37f7b378a29ceb4c551b1b5582e27747b855bbfaa73fa11914fe0df028dc581f
+dinarsabangulov@Mac-mini-DINERO ~ % docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES

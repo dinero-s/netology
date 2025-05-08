@@ -1,0 +1,41 @@
+dinarsabangulov@Mac-mini-DINERO ~ % docker pull node:15.14
+15.14: Pulling from library/node
+fba155217a46: Pull complete 
+1ce0b6aec0ac: Pull complete 
+860542326137: Pull complete 
+d461dd6a01f5: Pull complete 
+c190b75eb2b4: Pull complete 
+ce440adabe2a: Pull complete 
+41f38ce3010a: Pull complete 
+d82fbf846f6f: Pull complete 
+b7c0a158e8c1: Pull complete 
+Digest: sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+Status: Downloaded newer image for node:15.14
+docker.io/library/node:15.14
+dinarsabangulov@Mac-mini-DINERO ~ % mkdir -p data
+dinarsabangulov@Mac-mini-DINERO ~ % docker run -d --name first_node -v "$(pwd)/data:/var/first/data" node:15.14 sleep infinity
+13b7dd722395c1033da48b925401e73bc77e46fbaf3553b2be1f6f1b40b80931
+dinarsabangulov@Mac-mini-DINERO ~ % docker run -d --name second_node -v "$(pwd)/data:/var/second/data" node:15.14 sleep infinity
+69b498059fc0f66492faa7109c1ff1750bb2e1f7029391a4e28dc426d0392fb3
+dinarsabangulov@Mac-mini-DINERO ~ % docker exec first_node sh -c 'echo "Content 1" > /var/first/data/file1.txt'
+dinarsabangulov@Mac-mini-DINERO ~ % echo "Content 2" > data/file2.txt
+dinarsabangulov@Mac-mini-DINERO ~ % docker exec second_node ls -la /var/second/data
+total 12
+drwxr-xr-x 4 root root  128 May  8 13:08 .
+drwxr-xr-x 3 root root 4096 May  8 13:06 ..
+-rw-r--r-- 1 root root   10 May  8 13:08 file1.txt
+-rw-r--r-- 1 root root   10 May  8 13:08 file2.txt
+dinarsabangulov@Mac-mini-DINERO ~ % docker exec second_node cat /var/second/data/file1.txt
+Content 1
+dinarsabangulov@Mac-mini-DINERO ~ % docker exec second_node cat /var/second/data/file2.txt
+Content 2
+dinarsabangulov@Mac-mini-DINERO ~ % docker stop first_node second_node
+first_node
+second_node
+dinarsabangulov@Mac-mini-DINERO ~ % docker rm first_node second_node
+first_node
+second_node
+dinarsabangulov@Mac-mini-DINERO ~ % docker rmi node:15.14
+Untagged: node:15.14
+Deleted: sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+dinarsabangulov@Mac-mini-DINERO ~ % 
